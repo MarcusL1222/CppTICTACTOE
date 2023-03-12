@@ -1,0 +1,94 @@
+#include <iostream>
+using namespace std;
+
+string change_name(){
+    cout<<"Who will be O? Type in system."<<endl;
+    string O = "";
+    cin>>O;
+    cout<<"O will be "<<O<<endl;
+    cout<<"Who will be X? Type in system."<<endl;
+    string X = "";
+    cin>>X;
+    cout<<"X will be "<<X<<endl;
+    return "Finished.";
+}
+
+string start_game(){
+    string OK = "not";
+    string starter = "";
+    while(OK=="not"){
+        cout<<"Who will start first?Type \"O\" or \"X\"(It is changed every round.)"<<endl;
+        cin>>starter;
+        if (starter == "o"||starter == "O"||starter == "x"||starter == "X"    ){
+            OK = "OK";
+            cout<<"OK, "<<starter<<" will start first."<<endl;
+            break;
+        }
+        else{
+            continue;
+        }
+    }
+    return starter;
+}
+
+int choose(string XO){
+    int choose;
+    cout<<"Type the number you want to put "<<XO<<" in."<<endl;
+    cin>>choose;
+    cout<<"You choose number "<<choose<<"."<<endl;
+    return choose;
+}
+
+int main() {
+    change_name();
+    string end = "not";
+    while(end == "not"){
+        cout<<"What do you want to do now?(Change name = c/C, start match = s/S,end = e/E)"<<endl;
+        string options="";
+        cin>>options;
+        if (options == "c"||options == "C"||options == "s"||options == "S"||options == "e"||options == "E"){
+            if (options == "c"||options == "C"){
+                change_name();
+            }
+            else if(options == "s"||options == "S"){
+                string starter = start_game();
+                string winner = "not";
+                int board[9] = {
+                    1,2,3,
+                    4,5,6,
+                    7,8,9
+                    };
+                while (winner == "not"){
+                    cout<<board[0]<<"  "<<board[1]<<"  "<<board[2]<<endl;
+                    cout<<board[3]<<"  "<<board[4]<<"  "<<board[5]<<endl;
+                    cout<<board[6]<<"  "<<board[7]<<"  "<<board[8]<<endl;
+                    
+                    int chose = choose(starter);
+                    if (chose == 1||chose == 2||chose == 3||chose == 4||chose == 5||chose == 6||chose == 7||chose == 8||chose == 9){
+                        if (board[chose] == chose){
+                            cout<<"Success!";
+                        }
+                        
+                    }else{
+                        int chose;
+                        cout<<"Try again!"<<endl;
+                        choose(starter);
+                    }
+                }
+            }
+            else if (options == "e"||options == "E"){
+                cout<<"Match ended. See you next time!"<<endl;
+                break;
+            }
+            
+            
+            
+        }
+        else{
+            cout<<"Try again"<<endl;
+        }
+    }
+    
+
+    
+}
